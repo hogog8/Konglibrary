@@ -1,0 +1,108 @@
+
+html *{
+	font-family: "Quicksand", sans-serif;
+}
+
+.login_wrap{
+    width: 800px;
+    height: 400px;
+    padding: 30px;
+    border: 1.8px solid #DDD;
+    border-radius: 8px;
+    background: #FFF0E4;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+    top: 50%;
+    margin-top: -200px;
+}
+
+#imgAlign{
+	text-align: center;
+}
+
+#logo_img{
+
+}
+
+.login_wrap > .left {
+    width: 50%;
+    height: 100%;
+    border-right: 5px solid #874747;
+    padding-right: 30px;
+    float: left;
+
+ }
+
+ .login_wrap > .right {
+    height: 100%;
+    padding-left: 30px;
+    text-align: left;
+    overflow: hidden
+}
+
+#logo_txt{
+	margin-top:30px;
+	text-align: center;	/** to be deleted */
+	font-size: 1.5em;
+}
+
+form {
+    /* Just to center the form on the page */
+    padding-top:30px;
+    margin: 30px auto;
+  
+    /* To see the outline of the form */
+    padding: 1em;
+    border: 1.5px solid #E7B892;
+    border-radius: 1em;
+    height:250px;
+    background: #E7B892;
+}
+
+form div + div {
+    margin-top: 1em;
+}
+
+form input{
+	width:200px;
+	height:30px;
+}
+
+label {
+    /* To make sure that all label have the same size and are properly align */
+    display: inline-block;
+    width: 70px;
+    text-align: left;
+}
+
+.btn_wrap > button {
+    height: 40px;
+    padding: 5px 15px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: none;
+    font-size: 10pt;
+    color: #FFF;
+    background: #CCC;
+    cursor: pointer;
+}
+
+#login_btn{
+	background:#874747;
+}
+
+#register_btn{
+	background:#A6A6A6;
+	color:black;
+}
+
+.container{
+	background-color: #E6E6E6;
+}
+
+.inputField{
+	margin-top:20px;
+
+}

@@ -1,0 +1,79 @@
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+/*	initialize for fix size for width (except margin, padding, etc..)*/
+
+body {
+	max-width:1000px;
+	margin:0 auto;
+	width:80%;
+}
+body *{
+	font-size: inherit;
+    color: inherit;
+    box-sizing: border-box;
+}
+
+article, aside, footer, header, nav, section{
+	display: block;
+}
+
+a, a:hover, a:visited {
+	background-color:transparent;
+	-webkit-text-decoration-skip:objects;
+	text-decoration: none;
+	color:black;
+}
+img,div,a,form{
+	border-style: none;
+	border:0;
+	padding:0;
+}
+textarea{
+	overflow:auto;
+}
+hr{
+	box-sizing:content-box;
+	height:0;
+	overflow:visible
+}
+
+/*css from initalization sample*/
+/*
+
+*/
+.clear{
+	clear:both;
+}
+
+/*css for eaach device*/
+@media screen and (min-width:600px) {
+  nav {
+  	float:right;
+    width: 40%;
+  }
+  section {
+    margin-left: 25%;
+  }
+}
+@media screen and (max-width:599px) {
+  nav li {
+    display: inline;
+  }
+}
+
+/* css for nav bar 
+
+ul{
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+	display: inline;
+}
+*/

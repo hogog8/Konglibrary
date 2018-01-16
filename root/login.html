@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/init.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+
+	<script type="text/javascript" src="js/login.js"></script>
+	<title>KongLibrary</title>
+
+	
+
+</head>
+<body>
+	<div class="container">
+
+		<div class="login_wrap">
+			<div class="left">
+
+				<div id="logo_txt">
+					Kong University Library<br>
+					Konglibrary<br>
+				</div>
+				<div id="logo">
+
+					<p id="imgAlign"><img id="logo_img" src="img/logo.png" alt="logo img here"></p>
+				</div>
+
+			</div>
+			<div class="right" id="login_div">
+				<form id="login_info" method="post">
+					<div class="inputField">
+						<input type="text" id="name" placeholder="username"> @ kong.edu
+					</div>
+
+					<div class="inputField">
+						<input type="password" id="passwd" placeholder="password">
+					</div>
+
+					<div class="btn_wrap">
+					<button type="button" id="login_btn" onclick="do_login()">로그인</button>	<!--function to be made-->
+					<button type="button" id="register_btn" onclick="do_register()">회원가입</button>	<!--also will be made-->
+					</div>
+					<div id="login_warning" class="inputField" style="visibility:hidden;">
+						Username or password is incorrect, please try again.
+					</div>
+				</form>
+			</div>
+			<div class="right" id="register_div" style="display:none;">
+				<form id="regist_info" method="post">
+					<div class="inputField">
+						<input type="text" id="name" placeholder="username"> @ kong.edu
+					</div>
+
+					<div class="inputField">
+						<input type="password" id="passwd" placeholder="password">
+					</div>
+					
+					<div class="inputField">
+						<input type="text" id="student_ID" placeholder="Student ID #">
+					</div>
+					
+					<div class="inputField" id="user_type">
+						User Level:
+						<select>
+							<option>Beginner</option>
+							<option>Casual</option>
+							<option>Expert</option>
+						</select>
+						<br><button type="button" id="confirm_register_btn" onclick="confrim_register()">회원가입</button>	<!--also will be made-->
+						<div id="regist_warning" class="inputField" style="display:none;">
+							Username already in use.
+						</div>
+						<div id="regist_success" class="inputField" style="display:none;">
+							Registration successful!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

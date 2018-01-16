@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/init.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/calendar.css">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+	<title>KongLibrary</title>
+
+	
+
+</head>
+
+<body>
+	<div class="dim_bg" id="dim1"></div>
+
+	<header>
+		<div id="header">
+			<div id="header_left">
+				<img src="img/main_logo.jpg">
+			</div>
+			
+			<div id="header_right">
+
+				<!--voice reconition on/off and logout button-->
+				<div id="header_up">
+					<input type="range" id="voice_onoff" value="0" min="0" max="1"> Enable voice Recognition (value 1 for on, value 0 for off)
+					<button type="button" id="btn_logout" value="logout" onclick="logout()">logout</button>
+					<p id="header_title">Konglibrary</p>
+				</div>
+
+				<!--div for navigation bar-->
+				<div id="header_down">
+					<nav>
+						<ul>
+							<li><a class="active" href="#home" onclick="home_cas_bas()">Home</a></li>
+						  	<li class="dropdown">
+						  		<a href="javscript:void(0)" class="dropbtn">Subject</a>
+						  		<div class="dropdown-content">
+						  			<a href="#">Business</a>
+						  			<a href="#">Law</a>
+						  			<a href="#">Science & Math</a>
+						  			<a href="#">Histroy</a>
+						  			<a href="#">Education</a>
+						  			<a href="#">Computer and Tech</a>
+							</li>
+							<li class="dropdown">
+						  		<a href="javscript:void(0)" class="dropbtn">Genre</a>
+						  		<div class="dropdown-content">
+						  			<a href="#">action & adventure</a>
+									<a href="#">mystery</a>
+									<a href="#">arts & photography</a>
+									<a href="#">cookbooks</a>
+									<a href="#">religion & spirituality</a>
+									<a href="#">romance</a>
+									<a href="#">Sci-Fi & Fantasy</a>
+							</li>
+
+							<li><a href="#" id="nav_wishlist">WishList</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div id="tutorial_nav" class="tutorial_box" style="display: none;">
+					You can lookup all books of subject or genre you want in here.<br>
+					And you can add a book you want to read later to the wishlist.
+					<button id="tutorial_next2" class="tutorial_next">Next</button>
+				</div>
+			</div>
+
+		</div>
+	</header>
+
+
+	<!--Search Menu-->
+	<div class="search_wrap">
+		<p id="menu_search">Search</p>
+		<div id="menu_hr"></div>
+
+
+		<div class = "search_content" id ="search_title"> 
+			<div class= "search_left">Title :  </div>
+			<input id="title_input" type="text" placeholder="Title"></div>
+
+		<div class = "search_content" id ="search_author">
+			<div class= "search_left"> Author : </div>
+			<input id="author_input" type="text" placeholder="Author"></div>
+
+		<div class = "search_content" id ="search_isbn">
+			<div class= "search_left"> ISBN : </div>
+			<input id="isbn_input" type="text" placeholder="ISBN"></div>
+
+		<div class = "search_content" id ="search_genre"> <div class= "search_left">Genre :</div>
+			<select id="genre_input">
+				<option>--SELECT--</option>
+				<option>action & adventure</option>
+				<option>mystery</option>
+				<option>arts & photography</option>
+				<option>cookbooks</option>
+				<option>religion & spirituality</option>
+				<option>romance</option>
+				<option>Sci-Fi & Fantasy</option>
+			</select>
+		</div>
+		<div class = "search_content" id ="search_subject"> <div class= "search_left">Subject :</div>
+			<select id="subject_input">
+				<option>--SELECT--</option>
+				<option>Business</option>
+	  			<option>Law</option>
+	  			<option>Science & Math</option>
+	  			<option>Histroy</option>
+	  			<option>Education</option>
+	  			<option>Computer and Tech</option>
+			</select>
+		</div>
+		<div class = "search_content" id ="search_range"> Date Range: 
+		<input id="input_date_from" type="text" placeholder=""> to 
+		<input id="input_date_to" type="text" placeholder=""></div>
+				
+		<div class="btn_row">
+			
+			<button type="button">search</button>
+			<button type="button" onclick="reset_search()">clear</button>
+		</div>
+
+		<div id="tutorial_search" class="tutorial_box">
+			You can search a book with title, author, ISBN, etc.. in here.<br>
+			And you can search a book through gerne and subject, too!
+			<button id="tutorial_next1" class="tutorial_next">Next</button>
+		</div>
+	</div>
+
+
+	<!--result wrap-->
+	<div class="result_wrap" id="casual_page1">
+		
+		<div class="search_result" id="search_result_tutorial">
+			<div class="book_img">
+				<img src="img/cover/Harry_Potter_and_the_Sorcerer_s_Stone.jpg" onclick="load_hp_info_casual()"/>
+			</div>
+			<div class="book_info">
+				<div class="book_info_title">Harry Potter and the Sorcer's stone</div>
+				<div class="book_info_able">Available</div>
+			</div>
+
+			<div id="tutorial_result" class="tutorial_box" style="display: none;">
+				This is default result page. You can check availability of a book, 
+				and you can check the detailed information if you click the book cover image.
+				<button id="tutorial_next3" class="tutorial_next">Next</button>
+			</div>
+
+		</div>
+		
+		<div class="search_result">
+			<div class="book_img">
+				<img src="img/cover/calculus-3rd-ed-cover-image.jpg">	
+			</div>
+			<div class="book_info">
+				<div class="book_info_title">Calculus: 3rd Edition</div>
+				<div class="book_info_unable">Unavailable</div>
+			</div>
+		</div>
+		<div class="search_result"><!--
+			--><div class="book_img">
+					<img src="img/cover/1984-book-cover.jpeg">	
+				</div><!--
+			--><div class="book_info">
+					<div class="book_info_title">1984</div>
+					<div class="book_info_able">Available</div>
+			</div>
+		</div>
+		<div class="search_result">
+			<div class="book_img">
+				<img src="img/cover/macbeth-cover-image.png">	
+			</div>
+			<div class="book_info">
+				<div class="book_info_title">MacBeth</div>
+				<div class="book_info_unable">Unavailable</div>
+			</div>
+		</div>
+		<div class="search_result">
+			<div class="book_img">
+				<img src="img/cover/intro-to-java-cover-image.png">
+			</div>
+			<div class="book_info">
+				<div class="book_info_title">Introduction to java</div>
+				<div class="book_info_able">Available</div>
+			</div>
+		</div>
+		<div class="search_result">
+			<div class="book_img">
+				<img src="img/cover/algorithms-cover-image.png">
+			</div>
+			<div class="book_info">
+				<div class="book_info_title">Algorithms: A problem approach</div>
+				<div class="book_info_able">Available</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="result_wrap" id="query_cas_bas" style="display:none;">
+		
+		<div class="search_result">
+			<div class="book_img">
+				<img src="img/cover/intro-to-java-cover-image.png">
+			</div>
+			<div class="book_info">
+				<div class="book_info_title">Introduction to java</div>
+				<div class="book_info_able">Available</div>
+			</div>
+		</div>
+		<div class="search_result">
+			<div class="book_img">
+				<img src="img/cover/algorithms-cover-image.png">
+			</div>
+			<div class="book_info">
+				<div class="book_info_title">Algorithms: A problem approach</div>
+				<div class="book_info_able">Available</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="result_wrap detail" id="book_info_wrap" style="display:none;">
+		<button type="button" id="info_wrap_close_btn" onclick="casual1_return()">x</button>
+		
+		<div id="book_cover">
+			<img src="img/cover/Harry_Potter_and_the_Sorcerer_s_Stone.jpg">
+			<button type="button" id="btn_preview" onclick="hp_preview()">Preview</button>
+
+			<div id="tutorial_detail" class="tutorial_box">
+				You can check information about the book and preview it if you want!<br>
+				Also you can check out the book
+				<button id="tutorial_next4" class="tutorial_next">Next</button>
+			</div>
+
+		</div>
+
+		<div id="book_info">
+			
+			<div id="book_title" >Harry Potter and the Sorcer's stone</div>
+			
+			
+			<div id="info_hr"></div>
+			<div class="info_content" id="info_author">
+				<div class="info_left"> Author : </div>
+				<div class="info_right">J.K.Rowling</div>
+			</div>
+
+
+			<div class="info_content" id="info_date">
+				<div class="info_left"> Publication Date: </div>
+				<div class="info_right">Sep. 8, 1999</div>
+			</div>
+
+			<div class="info_content" id="info_genre">	
+				<div class="info_left"> Genre : </div>
+				<div class="info_right">Fantasy / Fiction</div>
+			</div>
+
+			<div class="info_content" id="info_isbn">
+				<div class="info_left"> ISBN : </div>
+				<div class="info_right">0439708184</div>
+			</div>
+
+			<div class="info_content" id="info_paperback">
+				<div class="info_left"> Paperback : </div>
+				<div class="info_right">309 pages</div>
+			</div>
+
+			<div class="info_content" id="info_publisher">
+				<div class="info_left"> Publisher : </div>
+				<div class="info_right">Scholastic</div>
+			</div>
+
+			<div class="info_content" id="info_abstract">
+				<div class="info_left" id="abs1"> Abstract : </div>
+				<div class="info_right" id="abs2">Harry Potter has no idea how famous<br>
+				 he is. That's because he is the one... <button type="button" id="btn_info_extend">+</button></div>
+			</div>
+		</div>
+
+		<div id="copy_info">
+
+			<div id="copy_info_row1">
+				<div class="copy_info_left">Copies</div>
+				<div class="copy_info_right">Availability</div>
+			</div>
+
+			<div id="copy_info_row2">
+				<div class="copy_info_left">Copy 1</div>
+				<div class="copy_info_right" id="copy_info_able">
+					<span id="span_able">Available</span>
+
+				</div>
+					<div id="div_btn_checkout">
+						<button onclick="hp_calendar_from_hp_info()" type="button" id="btn_checkout">checkout</button>
+					</div>
+			</div>
+
+			<div id="copy_info_row3">
+				<div class="copy_info_left">Copy 2</div>
+				<div class="copy_info_right" id="copy_info_unable">Checked out</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<div id="preview_wrap" style="display:none;">
+		<div id="tutorial_preview" class="tutorial_box">
+			You can preview the book here. Click buttons below to flip the book!<br>
+			<span style="font-weight: bold;">(Because of copyright, only 4 pages provide)</span>
+			<button id="tutorial_next5" class="tutorial_next">Next</button>
+		</div>
+		<div id="preview_wrap_close">
+			<button onclick="hp_preview_ret()" type="button" id="preview_wrap_close_btn">X</button>
+		</div>
+		<div id="preview_left" class="preview_content">
+			<div class="preview_content_img" id="page1">
+				<img src="img/preview/hp-page1.png">
+			</div>
+			<div id="page3" class="preview_content_img" style="display: none">
+				<img src="img/preview/hp-page3.png">
+			</div>
+			<div id="preview_left_flip" style="visibility:hidden;">
+				<button onclick="turn_backward()" class="flip_btn" type="button">&lt;</button>
+			</div>
+		</div>
+
+		<div id="preview_right" class="preview_content">
+			<div class="preview_content_img" id="page2">
+				<img src="img/preview/hp-page2.png">
+			</div>
+			<div id="page4" class="preview_content_img" style="display: none">
+				<img src="img/preview/hp-page4.png">
+			</div>
+			<div id="preview_right_flip">
+				<button onclick="turn_forward()" class="flip_btn" type="button">&gt;</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="calendar_wrap" style="display:none;">
+		<div class="dim_bg" id="dim2"></div>
+
+		<div class="result_wrap detail" id="calendar_wrap_bgwrap">
+		<button type="button" id="info_wrap_close_btn" onclick="casual1_return()">x</button>
+		
+		<div id="book_cover">
+			<img src="img/cover/Harry_Potter_and_the_Sorcerer_s_Stone.jpg">
+			<button type="button" id="btn_preview" onclick="hp_preview()">Preview</button>
+
+		</div>
+
+		<div id="book_info">
+			
+			<div id="book_title" >Harry Potter and the Sorcer's stone</div>
+			
+			
+			<div id="info_hr"></div>
+			<div class="info_content" id="info_author">
+				<div class="info_left"> Author : </div>
+				<div class="info_right">J.K.Rowling</div>
+			</div>
+
+
+			<div class="info_content" id="info_date">
+				<div class="info_left"> Publication Date: </div>
+				<div class="info_right">Sep. 8, 1999</div>
+			</div>
+
+			<div class="info_content" id="info_genre">	
+				<div class="info_left"> Genre : </div>
+				<div class="info_right">Fantasy / Fiction</div>
+			</div>
+
+			<div class="info_content" id="info_isbn">
+				<div class="info_left"> ISBN : </div>
+				<div class="info_right">0439708184</div>
+			</div>
+
+			<div class="info_content" id="info_paperback">
+				<div class="info_left"> Paperback : </div>
+				<div class="info_right">309 pages</div>
+			</div>
+
+			<div class="info_content" id="info_publisher">
+				<div class="info_left"> Publisher : </div>
+				<div class="info_right">Scholastic</div>
+			</div>
+
+			<div class="info_content" id="info_abstract">
+				<div class="info_left" id="abs1"> Abstract : </div>
+				<div class="info_right" id="abs2">Harry Potter has no idea how famous<br>
+				 he is. That's because he is the one... <button type="button" id="btn_info_extend">+</button></div>
+			</div>
+		</div>
+
+		<div id="copy_info">
+
+			<div id="copy_info_row1">
+				<div class="copy_info_left">Copies</div>
+				<div class="copy_info_right">Availability</div>
+			</div>
+
+			<div id="copy_info_row2">
+				<div class="copy_info_left">Copy 1</div>
+				<div class="copy_info_right" id="copy_info_able">
+					<span id="span_able">Available</span>
+
+				</div>
+					<div id="div_btn_checkout">
+						<button onclick="hp_calendar_from_hp_info()" type="button" id="btn_checkout">checkout</button>
+					</div>
+				</div>
+
+				<div id="copy_info_row3">
+					<div class="copy_info_left">Copy 2</div>
+					<div class="copy_info_right" id="copy_info_unable">Checked out</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<div id="tutorial_calendar" class="tutorial_box">
+			You can check the available date here. Select date you want to borrow the book and click checkout button!<br>
+			<button id="tutorial_next6" class="tutorial_next">Next</button>
+		</div>
+
+		<div id="calendar_wrap2">
+			<div id="calendar_row">
+				<span>Calndear Availability</span>
+				<button onclick="to_hp_info()" type="button" id="calendar_close">X</button>
+			</div>
+
+			<div id="calendar_content">
+				<div class='btn-holder'>
+					<button id='to_Nov' onclick="toNovFromDec()">&lt;</button>
+					<span id='currentDate'>2017년 12월</span> 
+					<button id='btnNext' onclick="toJanFromDec()">&gt;</button>
+				</div>
+				
+				<div id="calendar">
+					<table><colgroup><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"></colgroup><thead><tr><td class="sun">일</td><td class="">월</td><td class="">화</td><td class="">수</td><td class="">목</td><td class="">금</td><td class="sat">토</td></tr></thead><tbody><tr><td class="date-cell not-this-month sun">26</td><td class="date-cell not-this-month ">27</td><td class="date-cell not-this-month ">28</td><td class="date-cell not-this-month ">29</td><td class="date-cell not-this-month ">30</td><td class="date-cell ">1</td><td class="date-cell sat">2</td></tr><tr><td class="date-cell sun">3</td><td class="date-cell ">4</td><td class="date-cell ">5</td><td class="date-cell ">6</td><td class="date-cell ">7</td><td class="date-cell ">8</td><td class="date-cell sat">9</td></tr><tr><td class="date-cell sun">10</td><td class="date-cell ">11</td><td class="date-cell ">12</td><td class="date-cell ">13</td><td class="date-cell ">14</td><td class="date-cell ">15</td><td class="date-cell sat">16</td></tr><tr><td class="date-cell sun">17</td><td class="date-cell ">18</td><td class="date-cell ">19</td><td class="date-cell ">20</td><td class="date-cell ">21</td><td class="date-cell ">22</td><td class="date-cell sat">23</td></tr><tr><td class="date-cell sun">24</td><td class="date-cell ">25</td><td class="date-cell ">26</td><td class="date-cell ">27</td><td class="date-cell ">28</td><td class="date-cell ">29</td><td class="date-cell sat">30</td></tr><tr><td class="date-cell sun">31</td><td class="date-cell not-this-month ">1</td><td class="date-cell not-this-month ">2</td><td class="date-cell not-this-month ">3</td><td class="date-cell not-this-month ">4</td><td class="date-cell not-this-month ">5</td><td class="date-cell not-this-month sat">6</td></tr></tbody></table>
+				</div>
+				<div id="calendar_row2">
+					<div id="date_sel_explain">Click day(s) to highlight days for checkout!</div>
+					<div id="div_btn_checkout">
+						<button type="button">CHECKOUT</button>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="calendar_content2" style="display:none;">
+				<div class='btn-holder'>
+					<button id='btnPrev'>&lt;</button>
+					<span id='currentDate2'> 2017년 11월</span> 
+					<button id='btnNext' onclick="toDecFromNov()">&gt;</button>
+				</div>
+				<div id="prevCalendar">
+					<table>
+						<colgroup><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"></colgroup>
+						<thead><tr><td class="sun">일</td><td class="">월</td><td class="">화</td><td class="">수</td><td class="">목</td><td class="">금</td><td class="sat">토</td></tr></thead><tbody><tr><td class="date-cell not-this-month sun">29</td><td class="date-cell not-this-month ">30</td><td class="date-cell not-this-month ">31</td><td class="date-cell ">1</td><td class="date-cell ">2</td><td class="date-cell ">3</td><td class="date-cell sat">4</td></tr><tr><td class="date-cell sun">5</td><td class="date-cell ">6</td><td class="date-cell ">7</td><td class="date-cell ">8</td><td class="date-cell ">9</td><td class="date-cell ">10</td><td class="date-cell sat">11</td></tr><tr><td class="date-cell sun">12</td><td class="date-cell ">13</td><td class="date-cell ">14</td><td class="date-cell ">15</td><td class="date-cell ">16</td><td class="date-cell ">17</td><td class="date-cell sat">18</td></tr><tr><td class="date-cell sun">19</td><td class="date-cell ">20</td><td class="date-cell ">21</td><td class="date-cell ">22</td><td class="date-cell ">23</td><td class="date-cell ">24</td><td class="date-cell sat">25</td></tr><tr><td class="date-cell sun">26</td><td class="date-cell ">27</td><td class="date-cell ">28</td><td class="date-cell ">29</td><td class="date-cell ">30</td><td class="date-cell not-this-month ">1</td><td class="date-cell not-this-month sat">2</td></tr></tbody>
+					</table>
+				</div>
+				<div id="calendar_row2">
+					<div id="date_sel_explain">Click day(s) to highlight days for checkout!</div>
+					<div id="div_btn_checkout">
+						<button type="button">CHECKOUT</button>
+					</div>
+				</div>
+
+			</div>
+
+			<div id="calendar_content3" style="display:none;">
+				<div class='btn-holder'>
+					<button id='btnPrev'>&lt;</button>
+					<span id='currentDate3'>2018년 1월</span> 
+					<button id='btnNext'>&gt;</button>
+				</div>
+				<div id="nextCalendar">
+					<table>
+						<colgroup><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"></colgroup>
+						<thead><tr><td class="sun">일</td><td class="">월</td><td class="">화</td><td class="">수</td><td class="">목</td><td class="">금</td><td class="sat">토</td></tr></thead><tbody><tr><td class="date-cell not-this-month sun">31</td><td class="date-cell ">1</td><td class="date-cell ">2</td><td class="date-cell ">3</td><td class="date-cell ">4</td><td class="date-cell ">5</td><td class="date-cell sat">6</td></tr><tr><td id="jan7th" class="date-cell sun">7</td><td id="jan8th" class="date-cell ">8</td><td id="jan9th" class="date-cell ">9</td><td id="jan10th" class="date-cell ">10</td><td class="date-cell ">11</td><td class="date-cell ">12</td><td class="date-cell sat">13</td></tr><tr><td class="date-cell sun">14</td><td class="date-cell ">15</td><td class="date-cell ">16</td><td class="date-cell ">17</td><td class="date-cell ">18</td><td class="date-cell ">19</td><td class="date-cell sat">20</td></tr><tr><td class="date-cell sun">21</td><td class="date-cell ">22</td><td class="date-cell ">23</td><td class="date-cell ">24</td><td class="date-cell ">25</td><td class="date-cell ">26</td><td class="date-cell sat">27</td></tr><tr><td class="date-cell sun">28</td><td class="date-cell ">29</td><td class="date-cell ">30</td><td class="date-cell ">31</td><td class="date-cell not-this-month ">1</td><td class="date-cell not-this-month ">2</td><td class="date-cell not-this-month sat">3</td></tr></tbody></table>
+				</div>
+				<div id="calendar_row2">
+					<div id="date_sel_explain">Click day(s) to highlight days for checkout!</div>
+					<div id="div_btn_checkout">
+						<button type="button" onclick="toCheckout_confirm()">CHECKOUT</button>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div id="confirm_wrap" style="display:none;">
+
+		<div id="confirm_wrap_bgwrap" style="display:block;">
+		<div class="dim_bg" id="dim2"></div>
+
+		<div class="result_wrap detail" id="calendar_wrap_bgwrap">
+		<button type="button" id="info_wrap_close_btn" onclick="casual1_return()">x</button>
+		
+		<div id="book_cover">
+			<img src="img/cover/Harry_Potter_and_the_Sorcerer_s_Stone.jpg">
+			<button type="button" id="btn_preview" onclick="hp_preview()">Preview</button>
+
+		</div>
+
+		<div id="book_info">
+			
+			<div id="book_title" >Harry Potter and the Sorcer's stone</div>
+			
+			
+			<div id="info_hr"></div>
+			<div class="info_content" id="info_author">
+				<div class="info_left"> Author : </div>
+				<div class="info_right">J.K.Rowling</div>
+			</div>
+
+
+			<div class="info_content" id="info_date">
+				<div class="info_left"> Publication Date: </div>
+				<div class="info_right">Sep. 8, 1999</div>
+			</div>
+
+			<div class="info_content" id="info_genre">	
+				<div class="info_left"> Genre : </div>
+				<div class="info_right">Fantasy / Fiction</div>
+			</div>
+
+			<div class="info_content" id="info_isbn">
+				<div class="info_left"> ISBN : </div>
+				<div class="info_right">0439708184</div>
+			</div>
+
+			<div class="info_content" id="info_paperback">
+				<div class="info_left"> Paperback : </div>
+				<div class="info_right">309 pages</div>
+			</div>
+
+			<div class="info_content" id="info_publisher">
+				<div class="info_left"> Publisher : </div>
+				<div class="info_right">Scholastic</div>
+			</div>
+
+			<div class="info_content" id="info_abstract">
+				<div class="info_left" id="abs1"> Abstract : </div>
+				<div class="info_right" id="abs2">Harry Potter has no idea how famous<br>
+				 he is. That's because he is the one... <button type="button" id="btn_info_extend">+</button></div>
+			</div>
+		</div>
+
+		<div id="copy_info">
+
+			<div id="copy_info_row1">
+				<div class="copy_info_left">Copies</div>
+				<div class="copy_info_right">Availability</div>
+			</div>
+
+			<div id="copy_info_row2">
+				<div class="copy_info_left">Copy 1</div>
+				<div class="copy_info_right" id="copy_info_able">
+					<span id="span_able">Available</span>
+
+				</div>
+					<div id="div_btn_checkout">
+						<button onclick="hp_calendar_from_hp_info()" type="button" id="btn_checkout">checkout</button>
+					</div>
+				</div>
+
+				<div id="copy_info_row3">
+					<div class="copy_info_left">Copy 2</div>
+					<div class="copy_info_right" id="copy_info_unable">Checked out</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div id="calendar_wrap3">
+			<div id="calendar_row">
+				<span>Calndear Availability</span>
+				<button onclick="to_hp_info()" type="button" id="calendar_close">X</button>
+			</div>
+
+			<div id="calendar_content">
+				<div class='btn-holder'>
+					<button id='to_Nov' onclick="toNovFromDec()">&lt;</button>
+					<span id='currentDate'>2017년 12월</span> 
+					<button id='btnNext' onclick="toJanFromDec()">&gt;</button>
+				</div>
+				
+				<div id="calendar">
+					<table><colgroup><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"></colgroup><thead><tr><td class="sun">일</td><td class="">월</td><td class="">화</td><td class="">수</td><td class="">목</td><td class="">금</td><td class="sat">토</td></tr></thead><tbody><tr><td class="date-cell not-this-month sun">26</td><td class="date-cell not-this-month ">27</td><td class="date-cell not-this-month ">28</td><td class="date-cell not-this-month ">29</td><td class="date-cell not-this-month ">30</td><td class="date-cell ">1</td><td class="date-cell sat">2</td></tr><tr><td class="date-cell sun">3</td><td class="date-cell ">4</td><td class="date-cell ">5</td><td class="date-cell ">6</td><td class="date-cell ">7</td><td class="date-cell ">8</td><td class="date-cell sat">9</td></tr><tr><td class="date-cell sun">10</td><td class="date-cell ">11</td><td class="date-cell ">12</td><td class="date-cell ">13</td><td class="date-cell ">14</td><td class="date-cell ">15</td><td class="date-cell sat">16</td></tr><tr><td class="date-cell sun">17</td><td class="date-cell ">18</td><td class="date-cell ">19</td><td class="date-cell ">20</td><td class="date-cell ">21</td><td class="date-cell ">22</td><td class="date-cell sat">23</td></tr><tr><td class="date-cell sun">24</td><td class="date-cell ">25</td><td class="date-cell ">26</td><td class="date-cell ">27</td><td class="date-cell ">28</td><td class="date-cell ">29</td><td class="date-cell sat">30</td></tr><tr><td class="date-cell sun">31</td><td class="date-cell not-this-month ">1</td><td class="date-cell not-this-month ">2</td><td class="date-cell not-this-month ">3</td><td class="date-cell not-this-month ">4</td><td class="date-cell not-this-month ">5</td><td class="date-cell not-this-month sat">6</td></tr></tbody></table>
+				</div>
+				<div id="calendar_row2">
+					<div id="date_sel_explain">Click day(s) to highlight days for checkout!</div>
+					<div id="div_btn_checkout">
+						<button type="button">CHECKOUT</button>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="calendar_content2" style="display:none;">
+				<div class='btn-holder'>
+					<button id='btnPrev'>&lt;</button>
+					<span id='currentDate2'> 2017년 11월</span> 
+					<button id='btnNext' onclick="toDecFromNov()">&gt;</button>
+				</div>
+				<div id="prevCalendar">
+					<table>
+						<colgroup><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"></colgroup>
+						<thead><tr><td class="sun">일</td><td class="">월</td><td class="">화</td><td class="">수</td><td class="">목</td><td class="">금</td><td class="sat">토</td></tr></thead><tbody><tr><td class="date-cell not-this-month sun">29</td><td class="date-cell not-this-month ">30</td><td class="date-cell not-this-month ">31</td><td class="date-cell ">1</td><td class="date-cell ">2</td><td class="date-cell ">3</td><td class="date-cell sat">4</td></tr><tr><td class="date-cell sun">5</td><td class="date-cell ">6</td><td class="date-cell ">7</td><td class="date-cell ">8</td><td class="date-cell ">9</td><td class="date-cell ">10</td><td class="date-cell sat">11</td></tr><tr><td class="date-cell sun">12</td><td class="date-cell ">13</td><td class="date-cell ">14</td><td class="date-cell ">15</td><td class="date-cell ">16</td><td class="date-cell ">17</td><td class="date-cell sat">18</td></tr><tr><td class="date-cell sun">19</td><td class="date-cell ">20</td><td class="date-cell ">21</td><td class="date-cell ">22</td><td class="date-cell ">23</td><td class="date-cell ">24</td><td class="date-cell sat">25</td></tr><tr><td class="date-cell sun">26</td><td class="date-cell ">27</td><td class="date-cell ">28</td><td class="date-cell ">29</td><td class="date-cell ">30</td><td class="date-cell not-this-month ">1</td><td class="date-cell not-this-month sat">2</td></tr></tbody>
+					</table>
+				</div>
+				<div id="calendar_row2">
+					<div id="date_sel_explain">Click day(s) to highlight days for checkout!</div>
+					<div id="div_btn_checkout">
+						<button type="button">CHECKOUT</button>
+					</div>
+				</div>
+
+			</div>
+
+			<div id="calendar_content3" style="display:none;">
+				<div class='btn-holder'>
+					<button id='btnPrev'>&lt;</button>
+					<span id='currentDate3'>2018년 1월</span> 
+					<button id='btnNext'>&gt;</button>
+				</div>
+				<div id="nextCalendar">
+					<table>
+						<colgroup><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100"></colgroup>
+						<thead><tr><td class="sun">일</td><td class="">월</td><td class="">화</td><td class="">수</td><td class="">목</td><td class="">금</td><td class="sat">토</td></tr></thead><tbody><tr><td class="date-cell not-this-month sun">31</td><td class="date-cell ">1</td><td class="date-cell ">2</td><td class="date-cell ">3</td><td class="date-cell ">4</td><td class="date-cell ">5</td><td class="date-cell sat">6</td></tr><tr><td id="jan7th" class="date-cell sun">7</td><td id="jan8th" class="date-cell ">8</td><td id="jan9th" class="date-cell ">9</td><td id="jan10th" class="date-cell ">10</td><td class="date-cell ">11</td><td class="date-cell ">12</td><td class="date-cell sat">13</td></tr><tr><td class="date-cell sun">14</td><td class="date-cell ">15</td><td class="date-cell ">16</td><td class="date-cell ">17</td><td class="date-cell ">18</td><td class="date-cell ">19</td><td class="date-cell sat">20</td></tr><tr><td class="date-cell sun">21</td><td class="date-cell ">22</td><td class="date-cell ">23</td><td class="date-cell ">24</td><td class="date-cell ">25</td><td class="date-cell ">26</td><td class="date-cell sat">27</td></tr><tr><td class="date-cell sun">28</td><td class="date-cell ">29</td><td class="date-cell ">30</td><td class="date-cell ">31</td><td class="date-cell not-this-month ">1</td><td class="date-cell not-this-month ">2</td><td class="date-cell not-this-month sat">3</td></tr></tbody></table>
+				</div>
+				<div id="calendar_row2">
+					<div id="date_sel_explain">Click day(s) to highlight days for checkout!</div>
+					<div id="div_btn_checkout">
+						<button type="button" onclick="toCheckout_confirm()">CHECKOUT</button>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+		<div id="tutorial_confirm" class="tutorial_box">
+			You can check final result here. If result is wrong, click decline to go back<br>
+			Or you can finally check out the book! ^^
+			<button id="tutorial_next7" class="tutorial_next">Next</button>
+		</div>
+		<div id="confirm_content">
+			You are confirming to checkout<br>
+			<div id="confirm_bookname_row">
+				Harry Potter and the Sorcer's stone
+			</div>
+			<div id="confirm_range_row">
+				from <div id="confirm_range_from"> 1/7/2018 </div>
+				to <div id="confirm_range_to"> 1/10/2018 </div>
+			</div>
+
+			is this correct?<br>
+
+			<div id="confirm_btn_row">
+				<div id="confirm_btn1">
+					<button type="button" id="btn_decline" onclick="decline()">DECLINE</button>
+				</div>
+				<div id="confirm_btn2">
+					<button type="button" id="btn_confirm" onclick="confrim_cas_bas()">CONFIRM</button>
+				</div>
+			</div>
+			<div id="checkout_success" style="display:none; color:green;">
+					SUCCESS!
+			</div>
+		</div>
+	</div>
+
+	
+
+	<footer></footer>
+	<script src="js/main.js"></script>
+
+</body>
+</html>
